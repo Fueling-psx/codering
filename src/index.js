@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { Router, Route, hashHistory,IndexRoute} from 'react-router';
 import App from './components/App';
 import Home from './components/Home';
-import print from './components/printting';
+import print from './components/print/printting';
 
 
 ReactDOM.render((

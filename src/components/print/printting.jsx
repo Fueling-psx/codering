@@ -1,15 +1,14 @@
 require('sources/bower_components/bower-pt-sans/styles/pt_sans.css')
 require('styles/ubuntu-mono-font.less')
-require('styles/reset.less');
-require('styles/header.less');
-require('styles/printing.less');
+require('styles/print/printing.less');
 
-import Layer from 'react-layer';
 import React from 'react';
-import Code from './getCode';
-var Link = Code("http://ty.codering.cn/index.php/Home/Index/sendData");
-// console.log(Link);
-var codeStr = Code(Link);
+import Rodal from 'rodal';
+import 'rodal/lib/rodal.css';
+import codeStr from './data';
+import selectedInstance from './selectedInstance';
+import LineChart from './lineChart';
+
 
 
 var typing = React.createClass({
@@ -25,16 +24,11 @@ var typing = React.createClass({
 			currentValue: "",
 			codeIndex: 0,
 			start: false,
-			fontSize: "18"
+			fontSize: "18",
+			visible: true
 		};
 	},
 	componentWillMount: function() {
-		var layer = new Layer(document.body, function renderModal(){
-		        return (
-		          <h1>hello world</h1>
-		        );
-		      })
-		layer.render();	
 		this.nextPage();
 	},
 	componentDidMount: function() {
@@ -206,7 +200,7 @@ var typing = React.createClass({
 			
 	},
 	handleCheckedChange: function(e){
-		
+		alert(e);
 	},
 	AddCodeStyle: function(codeArr){
 		var note = false,codeFullArr = [];
@@ -255,6 +249,12 @@ var typing = React.createClass({
 	gameRestart: function(){
 
 	},
+	show: function() {
+        this.setState({ visible: true });
+    },
+    hide: function() {
+        this.setState({ visible: false });
+    },
 	render: function(){
 		var codeFullArr = this.state.codeFullArr;
 		var codeIndex = this.state.codeIndex;
@@ -263,17 +263,27 @@ var typing = React.createClass({
 		return  (
 			<div id="main-wrapper">
 				<div className="main">
+					<div>
+		                <button onClick={this.show}>show</button>
+
+		                <Rodal visible={this.state.visible} onClose={this.hide} width={700} height={400} animation="flip">
+		                    {LineChart}
+		                </Rodal>
+		            </div>
 					<div className="mheader">
-						<div className="toggle">
-							<input type="checkbox" onChange={this.handleCheckedChange(true)}/>
-							<span className="button"></span>
-							<span className="label">+</span>
+						<div className="tog-con">
+							<div className="toggle">
+								<input type="checkbox"/>
+								<span className="button"></span>
+								<span className="label">+</span>
+							</div>
+							<div className="toggle">
+								<input type="checkbox"/>
+								<span className="button"></span>
+								<span className="label">–</span>
+							</div>
 						</div>
-						<div className="toggle">
-							<input type="checkbox" onChange={this.handleCheckedChange(false)}/>
-							<span className="button"></span>
-							<span className="label">–</span>
-						</div>
+						{selectedInstance}
 					</div>
 					<pre>
 						{	
@@ -288,15 +298,6 @@ var typing = React.createClass({
 							<span onClick={this.previousPage}>上一页</span>
 							<span onClick={this.nextPage}>下一页</span>	
 						</div>
-						<div className="select">
-							<select name="line" id="">
-								<option value="25">25</option>
-								<option value="50">25</option>
-								<option value="70">25</option>
-								<option value="100">25</option>
-								<option value="125">25</option>
-							</select>
-						</div>
 						<div className="time">
 							<span>00:00</span>
 							<span>开始/暂停</span><span className="" onClick={this.gameState}><img src={this.state.start?"images/pause.svg":"images/play.svg"} alt=""/></span>
@@ -304,7 +305,7 @@ var typing = React.createClass({
 						</div>
 					</div>
 					<input type="text" value={this.state.preValue} onChange={this.handleChange} ref="nameInput" />
-				</div>
+					</div>
 			</div>
 		)
 	}
