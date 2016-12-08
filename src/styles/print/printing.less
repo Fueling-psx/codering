@@ -3,6 +3,12 @@ body{
   font-family: "Microsoft YaHei";
   background: rgba(153,153,153,.09999999999999998);
 }
+.show{
+  display: block!important;
+}
+.hide{
+  display: none!important;
+}
 #con{
   font-size:18px;
   color:#666;
@@ -32,9 +38,10 @@ body{
     word-wrap: break-word;
     .mheader{
       width: 100%;
-      background: #ccd0d4;
+      background: #eeeeee;
       box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
       height: 43.2px;
+      position: relative;
       .am-dropdown{
         top: 6px;
         left: 30px; 
@@ -43,6 +50,21 @@ body{
             background-color: #e2e3e5;
             border-color: #aaabac;
             padding: 0.3em 1em;
+        }
+      }
+      .time{
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        span{
+          margin-left:20px;
+          font-size: 14px;
+          cursor: pointer;
+          img{
+            width: 20px;
+            height: 20px;
+            position: relative;
+          }
         }
       }
       .tog-con{
@@ -146,12 +168,13 @@ body{
     }
     
     
-    pre{
+    >pre{
         display: block;
         font-family: 'Ubuntu Mono', monospace;
         white-space: pre;
-        color:#737373;
-        background: #1b1717;
+        color: #797777;
+        background: transparent;
+        border: none;
         padding: 15px;
         font-size: 18px;
         span {
@@ -190,10 +213,11 @@ body{
     .main-footer{
       margin: 50px 0;
       .pageing{
-        float: left;
-        span{
-          cursor: pointer;
-          margin-right: 20px;
+          button{
+          margin: auto;
+          display: block;
+          width: 250px;
+          height: 50px;
         }
       }
       .time{
@@ -201,32 +225,100 @@ body{
       }
     }
     input{
+      background:transparent;
+      border:none;
+      position:fixed;
+      left:0;
+      top:50%;
+      &:focus{
         background:transparent;
         border:none;
-        position:fixed;
-        left:0;
-        top:50%;
-        &:focus{
-          background:transparent;
-          border:none;
-          outline:medium;
-          opacity:0;
+        outline:medium;
+        opacity:0;
+      }
+    }
+    .summery{
+      margin: 130px auto;
+      width: 900px;
+      .am-panel-hd{
+        padding: 20px;
+        h1{
+          font-size: 36px;
+          text-align: center;
+          color: #7e7979;
         }
       }
-  }
-  .time{
-    position: absolute;
-    top: 40px;
-    right: 10px;
-    span{
-      margin-left:20px;
-      font-size: 14px;
-      cursor: pointer;
-      img{
-        width: 22px;
-        height: 22px;
-        position: relative;
-        top: 5px;
+      .lesson{
+        .am-panel-bd{
+          .am-u-sm-6:nth-child(2n-1){
+            text-align: right;
+            padding-right: 50px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            &.typed{
+              line-height: 102px;
+            }
+            &.errored{
+              line-height: 54.2px;
+            }
+          }
+          .am-u-sm-6:nth-child(2n){
+            text-align: left;
+            padding-left: 50px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            color: #4d504f;
+            .numerator{
+              border-bottom: 1px solid #999;
+              padding: .25em 0;
+              margin: 0 .2em;
+              font-size: 14px;
+              text-align: center;
+            }
+            .denominator{
+              font-size: 14px;
+              text-align: center;
+            }
+            .ty{
+              float: left;
+              line-height: 102px;
+            }
+            .ety{
+              float: left;
+              line-height: 54.2px;
+            }
+            .Intro{
+              float: right;
+              font-size: 14px;
+              width: 300px;
+              color: #7e7979;
+              ul>li:first-child{
+                text-indent: 1em;
+              }
+              .incorrectCount{
+                color: rgb(213, 27, 27);
+              }
+              .collateralCount{
+                color: rgb(248, 148, 6);
+              }
+            }
+          }
+        }
+      }
+      
+      .progress{
+        text-align: center;
+        padding: 10px 150px;
+        ul{
+          margin: 50px auto;
+          line-height: 2em;
+        }
+      }
+      button{
+        margin: auto;
+        display: block;
+        width: 250px;
+        height: 50px;
       }
     }
   }
